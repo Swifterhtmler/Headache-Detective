@@ -14,8 +14,8 @@ struct LogHeadacheIntent: AppIntent {
         let now = Date()
         _ = HeadacheEntry.create(
             in: context,
-            startDate: now.addingTimeInterval(-3600),
-            endDate: now,
+            startDate: now,
+            endDate: nil,
             painLevel: painLevel,
             beforeText: "",
             triggers: [],

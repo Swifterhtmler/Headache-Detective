@@ -1,9 +1,11 @@
 import SwiftUI
 import CoreData
+import StoreKit
 
 struct AddEntryView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var fetchController: EntryFetchController
+    @Environment(\.requestReview) private var requestReview
 
     @State private var startDate = Date().addingTimeInterval(-3600)
     @State private var endDate = Date()
@@ -210,6 +212,7 @@ struct AddEntryView: View {
         let isActive = abs(diff - abs(offset)) < 90
         return Button(label) {
             startDate = Date().addingTimeInterval(offset)
+            if hasEndDate { endDate = Date() }
         }
         .buttonStyle(.plain)
         .font(.caption.weight(.medium))
@@ -469,6 +472,7 @@ struct AddEntryView: View {
             isSaving = false
             showSavedAlert = true
         }
+        requestReviewIfNeeded()
     }
 
     private func quickLog(_ level: Int) {
@@ -477,7 +481,7 @@ struct AddEntryView: View {
         let now = Date()
         _ = HeadacheEntry.create(
             in: viewContext,
-            startDate: now.addingTimeInterval(-3600),
+            startDate: now,
             endDate: now,
             painLevel: level,
             beforeText: "",
@@ -494,7 +498,7 @@ struct AddEntryView: View {
             try? await HealthKitService.shared.requestAuthorization()
             try? await HealthKitService.shared.logHeadache(
                 painLevel: level,
-                start: now.addingTimeInterval(-3600),
+                start: now,
                 end: now
             )
         }
@@ -515,6 +519,16 @@ struct AddEntryView: View {
         medications = ""
         reliefMethods = ""
         notes = ""
+    }
+
+    private func requestReviewIfNeeded() {
+        let key = "totalSaves"
+        let count = UserDefaults.standard.integer(forKey: key) + 1
+        UserDefaults.standard.set(count, forKey: key)
+        let milestones = [3, 15, 50, 100]
+        if milestones.contains(count) {
+            requestReview()
+        }
     }
 }
 

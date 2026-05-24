@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241FECD92FC31F4500F5E35F /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 24ABCABC0100000100000002 /* RevenueCat */; };
+		241FECDA2FC31F4500F5E35F /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 24ABCABC0100000100000003 /* RevenueCatUI */; };
 		24AB16C02FC0F0A200F1566A /* Headache Widgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 24AB16B02FC0EBED00F1566A /* Headache Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,7 @@
 		24AB16B02FC0EBED00F1566A /* Headache Widgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Headache Widgets.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24AB16D02FC0F0A200F1566A /* WidgetInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WidgetInfo.plist; sourceTree = "<group>"; };
 		24AB16D12FC0F0A200F1566C /* Headache Detective.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Headache Detective.entitlements"; sourceTree = "<group>"; };
+		24ABCABC0100000100000004 /* Storekit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Storekit.storekit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -59,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241FECDA2FC31F4500F5E35F /* RevenueCatUI in Frameworks */,
+				241FECD92FC31F4500F5E35F /* RevenueCat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +84,7 @@
 				24AB16B12FC0EBED00F1566A /* Widgets */,
 				24AB16D02FC0F0A200F1566A /* WidgetInfo.plist */,
 				24AB16D12FC0F0A200F1566C /* Headache Detective.entitlements */,
+				24ABCABC0100000100000004 /* Storekit.storekit */,
 				24AB16972FC0AD7600F1566A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +120,8 @@
 			);
 			name = "Headache Detective";
 			packageProductDependencies = (
+				24ABCABC0100000100000002 /* RevenueCat */,
+				24ABCABC0100000100000003 /* RevenueCatUI */,
 			);
 			productName = "Headache Detective";
 			productReference = 24AB16962FC0AD7600F1566A /* Headache Detective.app */;
@@ -168,6 +176,9 @@
 			);
 			mainGroup = 24AB168D2FC0AD7600F1566A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				24ABCABC0100000100000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 24AB16972FC0AD7600F1566A /* Products */;
 			projectDirPath = "";
@@ -350,7 +361,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Headache Detective/Headache Detective.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = ZC82Y59CXU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -386,7 +397,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Headache Detective/Headache Detective.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = ZC82Y59CXU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -420,7 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = ZC82Y59CXU;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WidgetInfo.plist;
@@ -445,7 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = ZC82Y59CXU;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = WidgetInfo.plist;
@@ -496,6 +507,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		24ABCABC0100000100000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		24ABCABC0100000100000002 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 24ABCABC0100000100000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		24ABCABC0100000100000003 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 24ABCABC0100000100000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 24AB168E2FC0AD7600F1566A /* Project object */;
 }

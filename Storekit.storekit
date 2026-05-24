@@ -1,0 +1,47 @@
+{
+  "identifier" : "5C9E1B3D-8F7A-4E2C-B6D0-3A1F9E8C7D5B",
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "duration" : 30,
+      "familyRank" : 0,
+      "groupNumber" : 1,
+      "localizations" : [
+        {
+          "description" : "Unlock all features with monthly access",
+          "displayName" : "Monthly",
+          "locale" : "en_US"
+        }
+      ],
+      "productIdentifier" : "headache_detective_monthly",
+      "recurringSubscriptionPeriod" : "P1M",
+      "subscriptionGroupIdentifier" : "B2D4E6F8",
+      "type" : "Auto-Renewable Subscription"
+    },
+    {
+      "displayPrice" : "29.99",
+      "duration" : 365,
+      "familyRank" : 1,
+      "groupNumber" : 1,
+      "localizations" : [
+        {
+          "description" : "Unlock all features with yearly access — best value",
+          "displayName" : "Yearly",
+          "locale" : "en_US"
+        }
+      ],
+      "productIdentifier" : "headache_detective_yearly",
+      "recurringSubscriptionPeriod" : "P1Y",
+      "subscriptionGroupIdentifier" : "B2D4E6F8",
+      "type" : "Auto-Renewable Subscription"
+    }
+  ],
+  "settings" : [
+    {
+      "key" : "storekit_accounts",
+      "description" : "STARTER_ACCOUNT",
+      "type" : "string"
+    }
+  ],
+  "version" : 1
+}
