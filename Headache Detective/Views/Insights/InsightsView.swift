@@ -1,7 +1,10 @@
+import RevenueCat
 import SwiftUI
 
 struct InsightsView: View {
     @EnvironmentObject private var fetchController: EntryFetchController
+    @EnvironmentObject private var purchaseManager: PurchaseManager
+    @State private var showPaywall = false
 
     private var entries: [HeadacheEntry] { fetchController.entries }
     private var triggers: [TriggerInsight] { InsightsCalculator.topTriggers(from: entries) }
@@ -13,40 +16,122 @@ struct InsightsView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                if entries.isEmpty {
-                    emptyState
-                } else {
-                    VStack(spacing: AppTheme.sectionSpacing) {
-                        frequencySection
-
-                        if entries.count >= 7 {
-                            weekdaySection
-                        }
-
-                        if entries.count >= 3 {
-                            timeOfDaySection
-                        }
-
-                        if !triggers.isEmpty {
-                            triggersSection
-                        }
-
-                        if !locations.isEmpty {
-                            locationsSection
-                        }
-
-                        if !correlations.isEmpty {
-                            correlationsSection
-                        }
-                    }
-                    .padding(16)
-                }
+            if purchaseManager.isSubscribed {
+                insightsContent
+            } else {
+                lockedView
             }
-            .background(AppTheme.surfaceBackground)
-            .navigationTitle("Insights")
         }
         .navigationViewStyle(.stack)
+        .sheet(isPresented: $showPaywall) {
+            PaywallView()
+        }
+    }
+
+    private var insightsContent: some View {
+        ScrollView {
+            if entries.isEmpty {
+                emptyState
+            } else {
+                VStack(spacing: AppTheme.sectionSpacing) {
+                    frequencySection
+
+                    if entries.count >= 7 {
+                        weekdaySection
+                    }
+
+                    if entries.count >= 3 {
+                        timeOfDaySection
+                    }
+
+                    if !triggers.isEmpty {
+                        triggersSection
+                    }
+
+                    if !locations.isEmpty {
+                        locationsSection
+                    }
+
+                    if !correlations.isEmpty {
+                        correlationsSection
+                    }
+                }
+                .padding(16)
+            }
+        }
+        .background(AppTheme.surfaceBackground)
+        .navigationTitle("Insights")
+    }
+
+    private var lockedView: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            Image(systemName: "chart.bar.fill")
+                .font(.system(size: 50))
+                .foregroundStyle(AppTheme.textTertiary)
+
+            VStack(spacing: 8) {
+                Text("Insights are Pro")
+                    .font(.title2.weight(.bold))
+                    .foregroundStyle(AppTheme.textPrimary)
+
+                Text("Unlock advanced analytics to discover your headache patterns, triggers, and trends.")
+                    .font(.subheadline)
+                    .foregroundStyle(AppTheme.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            }
+
+            VStack(alignment: .leading, spacing: 12) {
+                row("Weekday & time-of-day patterns")
+                row("Top triggers ranked by frequency")
+                row("Pain location hotspots")
+                row("Trigger impact on severity")
+            }
+            .padding(.horizontal, 40)
+
+            Button {
+                Task {
+                    await purchaseManager.loadOfferings()
+                    showPaywall = true
+                }
+            } label: {
+                Text("Unlock Insights")
+                    .font(.headline.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(AppTheme.accentGradient)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    .padding(.horizontal, 40)
+            }
+            .buttonStyle(.plain)
+            .shadow(color: AppTheme.accentPrimary.opacity(0.3), radius: 12, y: 6)
+
+            Button("Restore Purchases") {
+                Task {
+                    await purchaseManager.restore()
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(AppTheme.textSecondary)
+
+            Spacer()
+        }
+        .background(AppTheme.surfaceBackground)
+        .navigationTitle("Insights")
+    }
+
+    private func row(_ text: String) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.caption)
+                .foregroundStyle(AppTheme.accentTertiary)
+            Text(text)
+                .font(.subheadline)
+                .foregroundStyle(AppTheme.textPrimary)
+        }
     }
 
     private var emptyState: some View {

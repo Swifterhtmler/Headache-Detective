@@ -37,6 +37,7 @@ struct AddEntryView: View {
                     reliefSection
                     notesSection
                     saveButton
+                    healthKitDisclosure
                 }
                 .padding(16)
             }
@@ -427,6 +428,33 @@ struct AddEntryView: View {
         }
         .padding(.bottom, 24)
         .disabled(isSaving)
+    }
+
+    private var healthKitDisclosure: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "heart.fill")
+                .font(.footnote)
+                .foregroundStyle(.white)
+                .frame(width: 26, height: 26)
+                .background(Color.red)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text("Apple Health")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppTheme.textPrimary)
+                Text("Headache entries are saved to the Health app")
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.textSecondary)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(12)
+        .background(AppTheme.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .cardShadowSmall()
+        .padding(.bottom, 8)
     }
 
     private func toggleTrigger(_ trigger: BeforeTrigger) {

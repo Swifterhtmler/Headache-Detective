@@ -38,6 +38,7 @@ struct MainTabView: View {
                 .tag(3)
         }
         .environmentObject(fetchController)
+        .environmentObject(PurchaseManager.shared)
         .tint(AppTheme.accentPrimary)
         .onChange(of: openAddScreen) { newValue in
             if newValue {

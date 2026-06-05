@@ -139,4 +139,4 @@ App Group `group.HeadacheDetective` is configured for shared Core Data access.
 
 ## License
 
-Copyright © 2026 Headache Detective. All rights reserved.
+Copyright © 2026 Riku Kuisma. All rights reserved.

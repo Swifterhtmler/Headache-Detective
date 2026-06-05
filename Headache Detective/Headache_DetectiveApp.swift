@@ -27,10 +27,6 @@ struct Headache_DetectiveApp: App {
                             UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
                         }
                     }
-                    .task {
-                        await purchaseManager.loadOfferings()
-                        await purchaseManager.checkSubscriptionStatus()
-                    }
             } else {
                 MainTabView(context: persistenceController.container.viewContext, openAddScreen: $openAddScreen)
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
@@ -39,6 +35,10 @@ struct Headache_DetectiveApp: App {
                         if url.scheme == "headache-detective" && url.host == "add" {
                             openAddScreen = true
                         }
+                    }
+                    .task {
+                        await purchaseManager.loadOfferings()
+                        await purchaseManager.checkSubscriptionStatus()
                     }
             }
         }
